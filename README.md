@@ -1,7 +1,7 @@
 # Home Assistant Titan IzyPower Integration (avec services de contrôle)
 
 Ceci est une version modifiée d'une intégration personnalisée pour Titan IzyPower.  
-Cette version ajoute des services essentiels permettant aux utilisateurs de gérer activement leur batterie Titan IzyPower (ex : Titan 2400, Titan PRO) directement depuis Home Assistant.
+Cette version ajoute des services essentiels permettant aux utilisateurs de gérer activement leur batterie Titan IzyPower (ex : Titan 2400, futur Titan PRO) directement depuis Home Assistant.
 
 L’intégration originale se focalise sur les données de monitoring, tandis que ce fork comble le manque en fournissant des services pour démarrer la charge, la décharge et stopper la batterie, ouvrant la voie à des automatisations avancées telles que le contrôle zéro export.
 
