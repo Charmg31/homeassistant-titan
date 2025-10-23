@@ -1,14 +1,15 @@
 {
   "domain": "titan_izypower",
   "name": "Titan IzyPower",
-  "version": "1.0.0",
-  "documentation": "https://github.com/Speedy2524/homeassistant-titan-izypower",   // Mets le lien de ta documentation si besoin
-  "issue_tracker": "https://github.com/Speedy2524/homeassistant-titan-izypower/issues",
-  "codeowners": ["@Speedy2524"],
+  "version": "0.0.1",
+  "documentation": "https://https://github.com/Charmg31/homeassistant-titan//homeassistant-titan-izypower",   // Mets le lien de ta documentation si besoin
+  "issue_tracker": "https://https://github.com/Charmg31/homeassistant-titan//homeassistant-titan-izypower/issues",
+  "codeowners": ["@Charmg31"],
   "requirements": [],
   "dependencies": [],
   "config_flow": true,
   "iot_class": "local_polling"
 }
+
 
 
