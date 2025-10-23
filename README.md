@@ -1,91 +1,66 @@
-# Home Assistant Titan IzyPower Integration (avec services de contrôle)
+Intégration Home Assistant Titan IzyPower (avec commandes de contrôle)
+Ce projet propose une adaptation personnalisée de l’intégration Indevolt disponible ici : https://github.com/solarmanpv/homeassistant-indevolt
+Grâce à cette version, il est désormais possible de piloter directement la batterie Titan IzyPower (modèles Titan 2400, ou futur Titan PRO) via Home Assistant, en ajoutant des services dédiés pour automatiser la gestion de la charge, de la décharge, ou l’arrêt de la batterie.
 
-Ceci est une version modifiée d'une intégration personnalisée pour Titan IzyPower. https://github.com/solarmanpv/homeassistant-indevolt
-Cette version ajoute des services essentiels permettant aux utilisateurs de gérer activement leur batterie Titan IzyPower (ex : Titan 2400, futur Titan PRO) directement depuis Home Assistant.
+L’intégration d’origine se concentre sur la supervision ; ce fork vient compléter la solution avec des fonctionnalités de pilotage essentielles, idéales pour des automatisations avancées – comme l’activation du mode zéro export.
 
-L’intégration originale se focalise sur les données de monitoring, tandis que ce fork comble le manque en fournissant des services pour démarrer la charge, la décharge et stopper la batterie, ouvrant la voie à des automatisations avancées telles que le contrôle zéro export.
+Modèles compatibles
+Cette intégration a été prévue pour fonctionner sur les modèles suivants :
 
----
+Génération 1 : Titan 2400, Titan 3200
 
-## Modèles supportés
+Génération future : Titan PRO
 
-Cette intégration a été testée et fonctionne avec les modèles suivants :
+En fonction du modèle sélectionné lors de l’installation, les bons capteurs seront automatiquement configurés.
 
-- **Gen 1 :** Titan 2400, Titan 3200
-- **Gen 2 :** Titan PRO  
+Fonctions & services personnalisés
+Ce fork enrichit le domaine titan_izypower de nouveaux services, à intégrer dans vos scripts ou automatisations :
 
-L’intégration fournira automatiquement les bons capteurs selon le modèle choisi lors de la configuration.
+titan_izypower.set_realtime_mode
+Permet au dispositif de recevoir des commandes en temps réel.
+À appeler une fois après chaque redémarrage de Home Assistant pour garantir la réactivité.
 
----
+Paramètre	Requis	Description
+(aucun)	–	Active le mode temps réel
+titan_izypower.charge
+Lance la charge de la batterie depuis le réseau ou via un surplus solaire.
 
-## Fonctionnalités & Services
+Paramètre	Requis	Description	Exemple
+power	Oui	Intensité de charge (W)	500
+titan_izypower.discharge
+Lance la décharge de la batterie pour alimenter le logement.
 
-Ce fork ajoute les services personnalisés suivants au domaine `titan_izypower`, utilisables dans vos automatisations et scripts :
+Paramètre	Requis	Description	Exemple
+power	Oui	Intensité de décharge (W)	300
+titan_izypower.stop
+Met le système en veille et interrompt toute opération de charge/décharge en cours.
 
-### `titan_izypower.set_realtime_mode`  
-> Mets le dispositif en mode acceptant les commandes de contrôle en temps réel.  
-> Ce service doit être appelé une fois après le démarrage de Home Assistant pour assurer un contrôle fiable.
+Paramètre	Requis	Description
+(aucun)	–	Arrête la charge/décharge
+Suivi et capteurs intégrés
+Une gamme complète de capteurs permet de suivre précisément l’activité de votre batterie, notamment :
 
-| Paramètre | Obligatoire | Description                |
-|-----------|-------------|----------------------------|
-| (aucun)   | –           | Active le mode temps réel  |
+Capteurs de puissance : puissance DC d’entrée (par string), puissance totale AC délivrée, puissance batterie, relevé compteur.
 
----
+Capteurs d’énergie : suivi production quotidienne et cumulative, énergie totale de charge/décharge (jour et cumulé).
 
-### `titan_izypower.charge`  
-> Demande à la batterie de commencer à charger depuis le réseau ou un surplus solaire.
+Capteurs batterie : indication du SOC et activité (charge/décharge).
 
-| Paramètre | Obligatoire | Description             | Exemple |
-|-----------|-------------|-------------------------|---------|
-| power     | Oui         | Puissance de charge (W) | 500     |
+Capteurs de statut : mode actuel et état de connexion au compteur.
 
----
+Installation et configuration
+Placez les fichiers de ce composant dans le dossier /homeassistant/custom_components/titan_izypower/.
 
-### `titan_izypower.discharge`  
-> Demande à la batterie de commencer à décharger pour alimenter le domicile.
+Accédez à Paramètres > Appareils & Services dans Home Assistant.
 
-| Paramètre | Obligatoire | Description                  | Exemple  |
-|-----------|-------------|------------------------------|----------|
-| power     | Oui         | Puissance de décharge (W)    | 300      |
+Appuyez sur Ajouter une intégration et cherchez TITAN IZYPOWER.
 
----
+Entrez les informations requises :
 
-### `titan_izypower.stop`  
-> Met la batterie en mode veille, stoppant toute charge ou décharge active.
+Host : IP de l’onduleur Titan
 
-| Paramètre | Obligatoire | Description            |
-|-----------|-------------|------------------------|
-| (aucun)   | –           | Stoppe la charge/décharge |
+Port : port API, généralement 8899
 
----
+Intervalle de scan : fréquence d’interrogation (défaut : 30 s)
 
-## Capteurs disponibles
-
-L’intégration crée un ensemble complet de capteurs pour surveiller tous les aspects de votre batterie Titan, incluant :
-
-- **Capteurs de puissance:** puissance entrée DC (par chaîne), puissance totale AC en sortie, puissance batterie, puissance du compteur.
-- **Capteurs d’énergie:** production journalière, production cumulée, énergie charge/décharge journalière et totale.
-- **Capteurs batterie:** état de charge (SOC), état charge/décharge.
-- **Capteurs statut:** mode de fonctionnement, état de la connexion compteur.
-
----
-
-## Configuration
-
-1. Téléchargez et installez ce composant personnalisé en plaçant les fichiers dans `/homeassistant/custom_components/titan_izypower/`.
-2. Dans Home Assistant, allez dans **Paramètres > Appareils & Services**.  
-3. Cliquez sur **Ajouter une intégration** et recherchez `TITAN IZYPOWER`.
-4. Remplissez les informations demandées :  
-    - **Host :** adresse IP de votre appareil Titan.  
-    - **Port :** port API (par défaut : `8899`).  
-    - **Intervalle de scan :** fréquence d'interrogation en secondes (par défaut : `30`).  
-    - **Modèle :** sélectionnez votre modèle Titan dans la liste déroulante.  
-
----
-
-## Exemples d’automatisations
-
-### 1. Activer le mode temps réel au démarrage
-
-Cette automatisation garantit que l’appareil est prêt à recevoir des commandes en temps réel dès que Home Assistant démarre.
-
+Modèle : choisissez le modèle dans la liste proposée
