@@ -1,0 +1,32 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connexion à votre appareil Titan IzyPower",
+        "description": "Entrez les informations de connexion de votre appareil.",
+        "data": {
+          "host": "Adresse IP",
+          "port": "Port",
+          "device_model": "Modèle d'appareil"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Échec de la connexion. Vérifiez l'adresse IP, le port et que l'appareil est bien en ligne.",
+      "unknown": "Une erreur inconnue est survenue. Consultez les logs Home Assistant pour plus de détails."
+    },
+    "abort": {
+      "already_configured": "Cet appareil a déjà été configuré."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Paramètres Titan IzyPower",
+        "data": {
+          "scan_interval": "Intervalle de mise à jour (secondes)"
+        }
+      }
+    }
+  }
+}
