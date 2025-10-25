@@ -62,7 +62,7 @@ Entrez les informations requises :
 
 Host : IP de l’onduleur Titan
 
-Port : port API, généralement 8899
+Port : port API, généralement 8890
 
 Intervalle de scan : fréquence d’interrogation (défaut : 30 s)
 
