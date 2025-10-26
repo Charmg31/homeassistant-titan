@@ -1,16 +1,14 @@
-Intégration Home Assistant Titan IzyPower (avec commandes de contrôle) -
-
-******En attente d'API ******
+Intégration Home Assistant Titan IzyPower (avec commandes de contrôle) - Atention! Version Béta. A vos risques et périls.
 
 Ce projet propose une adaptation personnalisée de l’intégration Indevolt disponible ici : https://github.com/solarmanpv/homeassistant-indevolt
 Grâce à cette version, il sera désormais possible de piloter directement la batterie Titan IzyPower (modèles Titan 2400, ou futur Titan PRO) via Home Assistant, en ajoutant des services dédiés pour automatiser la gestion de la charge, de la décharge, ou l’arrêt de la batterie.
 
-L’intégration d’origine se concentre sur la supervision ; ce fork vient compléter la solution avec des fonctionnalités de pilotage essentielles, idéales pour des automatisations avancées – comme l’activation du mode zéro export.
+L’intégration d’origine se concentre sur la supervision ; ce fork vient compléter la solution avec des fonctionnalités de pilotage essentielles, idéales pour des automatisations avancées 
 
 Modèles compatibles
 Cette intégration a été prévue pour fonctionner sur les modèles suivants :
 
-Génération 1 : Titan 2400, Titan 3200
+Génération 2 : Titan 2400
 
 Génération future : Titan PRO
 
@@ -67,3 +65,6 @@ Port : port API, généralement 8890
 Intervalle de scan : fréquence d’interrogation (défaut : 30 s)
 
 Modèle : choisissez le modèle dans la liste proposée
+
+
+Attention: L'installation et l'utilisation de cette intégration sont à vos riques périls, je ne suis pas responsable d'un brickage éventuel de vos appareils. 
