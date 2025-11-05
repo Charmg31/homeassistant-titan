@@ -5,7 +5,6 @@ import logging
 
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
-from homeassistant.core import callback
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -31,15 +30,31 @@ class IzypowerCoordinator(DataUpdateCoordinator):
         url = f"http://{self._host}:{self._port}{API_ENDPOINT}"
         codes = list(SENSOR_CODES.values())
         config_param = {"t": codes}
+        headers = {
+            "Content-Type": "application/json",
+            "Connection": "close",
+            "User-Agent": "RT-Thread HTTP Agent"
+        }
         try:
-            with async_timeout.timeout(10):
-                async with self._session.post(url, json={"config": config_param}) as response:
+            with async_timeout.timeout(8):
+                async with self._session.post(url, json={"config": config_param}, headers=headers) as response:
                     if response.status != 200:
                         raise UpdateFailed(f"Error fetching data: {response.status}")
                     data = await response.json()
                     return data
         except Exception as err:
             raise UpdateFailed(f"Error communicating with Izypower Titan: {err}")
+
+async def async_setup_entry(hass, entry):
+    session = aiohttp.ClientSession()
+    coordinator = IzypowerCoordinator(hass, session, entry.data["host"], entry.data.get("port", 8080))
+    await coordinator.async_config_entry_first_refresh()
+
+    hass.data.setdefault("izypower_titan", {})[entry.entry_id] = coordinator
+
+    hass.config_entries.async_forward_entry_setups(entry, ["sensor"])
+
+    return True
 
 class IzypowerSensor(SensorEntity):
     def __init__(self, coordinator, sensor_key):
@@ -59,4 +74,9 @@ class IzypowerSensor(SensorEntity):
 
     async def async_update(self):
         await self.coordinator.async_request_refresh()
+
+
+    async def async_update(self):
+        await self.coordinator.async_request_refresh()
+
 
