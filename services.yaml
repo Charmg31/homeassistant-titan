@@ -1,0 +1,16 @@
+charge:
+  description: "Start charging battery to given power"
+  fields:
+    power:
+      description: "Power in Watts to charge at"
+      example: 500
+
+discharge:
+  description: "Start discharging battery to given power"
+  fields:
+    power:
+      description: "Power in Watts to discharge at"
+      example: 300
+
+stop:
+  description: "Stop battery charging or discharging"

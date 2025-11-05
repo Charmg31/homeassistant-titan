@@ -1,0 +1,8 @@
+{
+  "domain": "izypower_titan",
+  "name": "Izypower Titan Battery",
+  "version": "1.0",
+  "requirements": [ "aiohttp" ],
+  "config_flow": true,
+  "iot_class": "local_polling"
+}
