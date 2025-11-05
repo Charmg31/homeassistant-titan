@@ -26,7 +26,7 @@ class IzypowerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             data_schema=data_schema,
             errors=errors,
             description_placeholders={
-                "warning": "Attention : Ce composant est fait pour les batteries Izypower Titan uniquement. L’utilisation est à vos risques et périls. Nous déclinons toute responsabilité en cas de dommages."
+                "warning": "Attention : Ce composant est fait pour les batteries Izypower Titan uniquement. Utilisation à vos risques et périls. Nous déclinons toute responsabilité en cas de dommages."
             },
         )
 
