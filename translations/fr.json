@@ -1,0 +1,11 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connexion à la batterie Izypower Titan",
+        "description": "{warning}",
+        "acknowledgement_required": "Merci de valider l’avertissement ci-dessous pour continuer."
+      }
+    }
+  }
+}
